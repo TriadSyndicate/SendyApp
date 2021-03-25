@@ -1,0 +1,14 @@
+{
+  "name": "sendyapp",
+  "version": "1.0.0",
+  "description": "sendy delivery app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sweetalert2": "^10.15.5"
+  }
+}
