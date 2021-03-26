@@ -34,7 +34,7 @@
                     <p class="mbr-text pb-3 mbr-fonts-style display-5">We deliver your products to your customers
                         efficiently &amp; on time!<br>Choose Deliveryy :D</p>
                     <div class="mbr-section-btn"><a class="btn btn-md btn-white-outline display-4"
-                            href="/">Join Us!</a></div>
+                            href="./register.php">Join Us!</a></div>
                 </div>
             </div>
         </div>
