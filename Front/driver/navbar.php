@@ -21,7 +21,7 @@ if (isset($_SESSION['LoggedIn'])) {
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="index.html">
-                        <img src="assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
+                        <img src="../assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
                     </a>
                 </span>
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="/">Deliveryy..</a></span>
