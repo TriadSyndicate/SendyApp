@@ -149,6 +149,37 @@ $(document).ready(function () {
                 });
         }
     });
+    $("#signInBTNDriver").on('click', function (e) {
+        e.preventDefault();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        if (email == "" || password == "") {
+            alertSweet('Enter the correct email or password', 'warning', 'Missing Input');
+            return false;
+        } else {
+            $.post("requests.php",
+                //JS Object to be posted to the orders.php file
+                { email: email, password: password, type: 'clientSignIn' },
+                //Callback
+                function (result) {
+                    var p = JSON.parse(result);
+                    //alert(p.response);
+                    if (p.response == "success") {
+                        alertSweet('Successfully Signed In', 'success', 'Welcome');
+                        document.cookie = `fname=${p.firstName}`;
+                        document.cookie = `lname=${p.lastName}`;
+                        document.cookie = `email=${p.email}`;
+                        document.cookie = `phone=${p.phone}`;
+                        document.cookie = `role=${p.role}`;
+                        document.cookie = `image=${p.image}`;
+                        document.cookie = `user_id=${p.userid}`;
+                        window.location.href = './index.php';
+                    } else if (p.response == "error") {
+                        alertSweet('Invalid Login Credentials', 'error', 'Failed');
+                    }
+                });
+        }
+    });
     $("#signUpBTN").on('click', function (e) {
         e.preventDefault();
         var firstName = $("#firstName").val();
