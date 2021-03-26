@@ -20,7 +20,7 @@ if (isset($_SESSION['LoggedIn'])) {
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.php">
+                    <a href="./index.php">
                         <img src="../assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
                     </a>
                 </span>
