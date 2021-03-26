@@ -44,7 +44,7 @@ if (isset($_SESSION['LoggedIn'])) {
                     <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
 
                             <?php echo $_SESSION['firstName']; ?></a>
-                        <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="./profile.php"><span class="mbri-setting mbr-iconfont mbr-iconfont-btn"></span>Profile</a><a class="text-white dropdown-item display-4" href="./history.php">Account
+                        <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="./history.php">Account
                                 History<br></a><a class="text-white dropdown-item display-4" href="./signout.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Log Out</a></div>
                     </li> <?php } ?>
             </ul>
