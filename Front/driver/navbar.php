@@ -24,7 +24,7 @@ if (isset($_SESSION['LoggedIn'])) {
                         <img src="../assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="/">Deliveryy..</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="./index.php">Deliveryy..</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

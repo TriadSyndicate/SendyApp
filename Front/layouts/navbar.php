@@ -30,7 +30,7 @@ if (isset($_SESSION['LoggedIn'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="/">
+                    <a class="nav-link link text-white display-4" href="./index.php">
                         <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
                         Home</a>
                 </li>
