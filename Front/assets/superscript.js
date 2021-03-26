@@ -157,7 +157,7 @@ $(document).ready(function () {
             alertSweet('Enter the correct email or password', 'warning', 'Missing Input');
             return false;
         } else {
-            $.post("requests.php",
+            $.post("../requests.php",
                 //JS Object to be posted to the orders.php file
                 { email: email, password: password, type: 'clientSignIn' },
                 //Callback

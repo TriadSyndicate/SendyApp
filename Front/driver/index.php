@@ -108,9 +108,16 @@ if (!isset($_SESSION['LoggedIn'])) {
             $('#example').DataTable();
         });
 
-        function completeTrip(orderID, driverID ) {
-            $.post("req1.php",
-                {
+        function alertSweet(message, type, title) {
+            Swal.fire({
+                icon: `${type}`,
+                title: `${title}`,
+                text: `${message}`
+            })
+        }
+
+        function completeTrip(orderID, driverID) {
+            $.post("req1.php", {
                     orderID: orderID,
                     driverID: driverID,
                     type: 'completeTrip'
@@ -121,20 +128,12 @@ if (!isset($_SESSION['LoggedIn'])) {
                     console.log(result);
                     //alert(p.response);
                     if (p.response == "ok") {
-                        alertSweet('Successfully Signed Up as Driver', 'success', `Welcome ${firstName}`);
+                        alertSweet(`Successfully Completed the Trip ${p.origin} -> ${p.destination}`, 'success', `Recipient: ${p.recipientName} :: ${p.recipientContact}`);
                     } else if (p.response == "error") {
                         alertSweet('That email already exists', 'error', 'Failed');
                     }
                 });
         }
-        var input = document.querySelector("#phone");
-        window.intlTelInput(input, {
-            // any initialisation options go here
-            autoHideDialCode: false,
-            separateDialCode: true,
-            initialCountry: "KE",
-            utilsScript: "../tel-build/js/utils.js",
-        });
     </script>
 </body>
 
