@@ -24,20 +24,24 @@ if (isset($_SESSION['LoggedIn'])) {
                         <img src="assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="./index.php">Deliveryy..</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="./">Deliveryy..</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="./index.php">
+                    <a class="nav-link link text-white display-4" href="./">
                         <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
                         Home</a>
                 </li>
-                <!--<li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="#">
-                        What We Do</a>
-                </li>-->
+                <?php
+                if (isset($_SESSION['LoggedIn'])) {
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="./dashboard.php">
+                        Dashboard</a>
+                </li>
+                <?php }?>
                 <?php
                 if (isset($_SESSION['LoggedIn'])) {
                 ?>

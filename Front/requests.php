@@ -59,7 +59,6 @@ if (isset($_POST['type'])) {
                     $resp->image = $row2['image'];
                     $resp->userid = $row2['user_id'];
                     $resp->response = 'success';
-
                 } else {
                     $resp = new \stdClass();
                     $resp->response = 'error';
@@ -71,8 +70,7 @@ if (isset($_POST['type'])) {
         }
         $myJSON = json_encode($resp);
         echo $myJSON;
-    }
-    else if($_POST['type'] == 'orderPOST'){
+    } else if ($_POST['type'] == 'orderPOST') {
         $stmt3 = $conn->prepare('INSERT INTO order_data(user_id, origin, destination, distance, price, recipient_name, recipient_contact, status) VALUES(?,?,?,?,?,?,?,?)');
         $stmt3->bind_param('ssssssss', $_POST['user_id'], $_POST['origin'], $_POST['destination'], $_POST['distance'], $_POST['price'], $_POST['recipient_name'], $_POST['recipient_contact'], $_POST['status']);
         $stmt3->execute();
@@ -80,6 +78,56 @@ if (isset($_POST['type'])) {
         $resp = new \stdClass();
         $resp->lastid = $last_id;
         $resp->response = 'ok';
+        $myJSON = json_encode($resp);
+        echo $myJSON;
+    } else if ($_POST['type'] == 'confirmDelivery') {
+        $_SESSION['selectedOrder'] = $_POST['orderID'];
+        $_SESSION['selectedDriver'] = $_POST['driverID'];
+        if ($_SESSION['selectedOrder'] == $_POST['orderID'] && $_SESSION['selectedDriver'] == $_POST['driverID']) {
+            $resp = new \stdClass();
+            $resp->response = 'ok';
+        } else {
+            $resp = new \stdClass();
+            $resp->response = 'error';
+        }
+        $myJSON = json_encode($resp);
+        echo $myJSON;
+    } else if ($_POST['type'] == 'ratingPOST') {
+        $resp = new \stdClass();
+        $sql = "INSERT INTO rating_data (rating_comment, rating_star, driver_id)
+            VALUES ('$_POST[comment]', '$_POST[rating]', '$_SESSION[selectedDriver]')";
+        if (mysqli_query($conn, $sql)) {
+            $last_id = mysqli_insert_id($conn);
+            $sql = "UPDATE order_data SET rating_id=$last_id, status='COMPLETED' WHERE order_id=$_POST[orderID]";
+
+            if (mysqli_query($conn, $sql)) {
+                $sql1 = "SELECT * FROM order_data";
+                $result = mysqli_query($conn, $sql1);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        if ($row['order_id'] == $_POST['orderID']) {
+                            # code...
+                            $resp->destination = $row['destination'];
+                            $resp->origin = $row['origin'];
+                            $resp->distance = $row['distance'];
+                            $resp->price = $row['price'];
+                            $resp->recipientName = $row['recipient_name'];
+                            $resp->recipientContact = $row['recipient_contact'];
+                            $resp->response = 'ok';
+                        }
+                    }
+                } else {
+                    echo "0 results";
+                }
+            }
+        } else {
+            $resp = new \stdClass();
+            $resp->response = mysqli_error($conn);
+        }
+
+        mysqli_close($conn);
         $myJSON = json_encode($resp);
         echo $myJSON;
     }

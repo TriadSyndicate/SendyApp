@@ -22,7 +22,7 @@ $(document).ready(function () {
         return "";
       }
     function RequestAlert(distance) {
-        alert(getCookie('user_id'));
+        //alert(getCookie('user_id'));
         Swal.fire({
             title: `Cost:${Math.trunc((distance / 1000) * 20)} KES`,
             text: `Distance in KMS:${Math.trunc(distance / 1000)} 
@@ -44,7 +44,7 @@ $(document).ready(function () {
                 }).queue([
                     {
                         title: 'Recipient Name',
-                        text: 'Chaining swal2 modals is easy'
+                        text: 'The person to receive the shipment'
                     },
                     'Recipient Contact'
                 ]).then((result) => {
@@ -59,9 +59,9 @@ $(document).ready(function () {
                             //console.log(result);
                             //alert(p.response);
                             if (p.response == "ok") {
-                                alertSweet('Successfully Signed Up', 'success', 'Welcome');
+                                alertSweet('The Driver will be in contact with you', 'info', 'Your Request has been sent!');
                             } else if (p.response == "error") {
-                                alertSweet('That email already exists', 'error', 'Failed');
+                                alertSweet('Sth, went wrong..,Try Again!', 'error', 'Failed');
                             }
                         });
                     }
@@ -142,7 +142,12 @@ $(document).ready(function () {
                         document.cookie = `role=${p.role}`;
                         document.cookie = `image=${p.image}`;
                         document.cookie = `user_id=${p.userid}`;
-                        window.location.href = './home.php';
+                        if (p.role==='DRIVER') {
+                            window.location.href = './driver/';
+                        }else{
+                            window.location.href = './dashboard.php';
+                        }
+                        
                     } else if (p.response == "error") {
                         alertSweet('Invalid Login Credentials', 'error', 'Failed');
                     }

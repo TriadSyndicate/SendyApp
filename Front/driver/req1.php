@@ -1,6 +1,6 @@
     <?php
     include '../db.php';
-    $sql = "UPDATE order_data SET driver_id='$_POST[driverID]', status='COMPLETED' WHERE order_id=$_POST[orderID]";
+    $sql = "UPDATE order_data SET driver_id='$_POST[driverID]', status='PICKED UP' WHERE order_id=$_POST[orderID]";
 
     if (mysqli_query($conn, $sql)) {
         $resp = new \stdClass();

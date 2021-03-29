@@ -1,10 +1,21 @@
 <?php
-session_start();
+//session_start();
 $loggedCheck = 0;
 if (isset($_SESSION['LoggedIn'])) {
     # code...
-    if ($_SESSION['LoggedIn'] == 1) {
+    include '../db.php';
+    $sql1 = "SELECT * FROM rating_data WHERE driver_id ='$_SESSION[userid]'";
+    $result = mysqli_query($conn, $sql1);
+    $rating = 0;
+    $counter = 0;
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {
+            $counter = $counter + 1;
+            $rating = $rating + (int)$row['rating_star'];
+        }
     }
+    $rating = $rating / $counter;
 }
 ?>
 <section class="menu cid-qTkzRZLJNu" once="menu" id="menu1-0">
@@ -20,32 +31,35 @@ if (isset($_SESSION['LoggedIn'])) {
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="./index.php">
+                    <a href="index.php">
                         <img src="../assets/images/mbr-122x195.png" alt="Yeet" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="./index.php">Deliveryy..</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="../">Deliveryy..</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+            <?php
+                if (isset($_SESSION['LoggedIn'])) {
+            ?>
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="./navbar.php">
+                    <a class="nav-link link text-white display-4">
+                        <span class="mbri-star mbr-iconfont mbr-iconfont-btn"></span>
+                        Rating (<?php echo $rating; ?>)</a>
+                </li><?php } ?>
+                <li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="./">
                         <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
                         Home</a>
                 </li>
-                <!--<li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="#">
-                        What We Do</a>
-                </li>-->
                 <?php
                 if (isset($_SESSION['LoggedIn'])) {
                 ?>
                     <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
 
                             <?php echo $_SESSION['firstName']; ?></a>
-                        <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="./profile.php"><span class="mbri-setting mbr-iconfont mbr-iconfont-btn"></span>Profile</a><a class="text-white dropdown-item display-4" href="./history.php">Account
-                                History<br></a><a class="text-white dropdown-item display-4" href="./signout.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Log Out</a></div>
+                        <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="./signout.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Log Out</a></div>
                     </li> <?php } ?>
             </ul>
             <?php

@@ -10,7 +10,7 @@
     <meta name="description" content="">
 
 
-    <title>Driver Register | Deliveryy App</title>
+    <title>Vehicle Register | Deliveryy App</title>
     <link rel="stylesheet" href="../assets/web/assets/mobirise-icons/mobirise-icons.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-grid.min.css">
@@ -26,13 +26,7 @@
 </head>
 
 <body>
-    <?php 
-    session_start();
-    include 'navbar.php'; 
-        if (isset($_SESSION['LoggedIn'])) {
-            header("Location: login.php");
-        }
-    ?>
+    <?php include 'navbar.php'; ?>
 
     <section class="mbr-section form1 cid-sr3zdiULRq" id="form1-8">
         <div class="container">
@@ -54,24 +48,14 @@
                                 <div class="col-lg-6" id="left">
                                     <div class="row">
                                         <div class="col-md-3  form-group" data-for="name">
-                                            <label for="firstName" class="form-control-label mbr-fonts-style display-7">First Name</label>
-                                            <input type="text" name="firstName" data-form-field="Name" required="required" class="form-control display-5" id="firstName">
-                                        </div>
-                                        <div class="col-md-3  form-group" data-for="name">
-                                            <label for="lastName" class="form-control-label mbr-fonts-style display-7">Last Name</label>
-                                            <input type="text" name="lastName" data-form-field="Name" required="required" class="form-control display-7" id="lastName">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6  form-group" data-for="email">
-                                            <label for="email" class="form-control-label mbr-fonts-style display-7">Email</label>
-                                            <input type="email" name="email" data-form-field="Email" required="required" class="form-control display-7" id="email">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div data-for="phone" class="col-md-6  form-group">
-                                            <label for="phone" class="form-control-label mbr-fonts-style display-7">Phone</label>
-                                            <input type="tel" name="phone" data-form-field="Phone" class="form-control display-7" id="phone">
+s
+
+                                            <select name="cars" id="cars">
+                                                <option value="volvo">Volvo</option>
+                                                <option value="saab">Saab</option>
+                                                <option value="mercedes">Mercedes</option>
+                                                <option value="audi">Audi</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -83,14 +67,6 @@
                                     <div data-for="password" class="col-md-4  form-group">
                                         <label for="confirmPassword" class="form-control-label mbr-fonts-style display-7">Confirm Password</label>
                                         <input type="password" name="confirmPassword" data-form-field="password" class="form-control display-7" id="confirmPassword">
-                                    </div>
-                                    <div data-for="vehicleMake" class="col-md-4  form-group">
-                                        <label for="vehicleMake" class="form-control-label mbr-fonts-style display-7">Vehicle Make</label>
-                                        <input type="text" required name="vehicleMake" placeholder="Vehicle Model" data-form-field="text" class="form-control display-7" id="vehicleMake">
-                                    </div>
-                                    <div data-for="vehicleRegistration" class="col-md-4  form-group">
-                                        <label for="vehicleRegistration" class="form-control-label mbr-fonts-style display-7">Registration No.</label>
-                                        <input type="text" required name="vehicleRegistration" data-form-field="text" placeholder="Vehicle Plates" class="form-control display-7" id="vehicleRegistration">
                                     </div>
                                     <div>
                                         <label>Upload Image File:</label><br />
@@ -152,8 +128,6 @@
                 var email = $("#email").val();
                 var confirmPassword = $("#confirmPassword").val();
                 var password = $("#password").val();
-                var vehicleMake = $("#vehicleMake").val();
-                var vehicleRegistration = $("#vehicleRegistration").val();
 
                 if (firstName == "") {
                     alertSweet('Input first Name', 'error', 'Missing Input');
@@ -176,13 +150,7 @@
                 } else if (password !== confirmPassword) {
                     alertSweet('Passwords Do not Mach', 'error', 'Password Error');
                     return false;
-                }  else if (vehicleMake == "") {
-                    alertSweet('Enter your vehicle make & model', 'warning', 'Missing Input');
-                    return false;
-                } else if (vehicleRegistration == "") {
-                    alertSweet('Input Vehicle Registration No.', 'warning', 'Missing Input');
-                    return false;
-                }else {
+                } else {
                     console.log('alert2');
                     $.post("req.php",
                         //JS Object to be posted to the orders.php file
@@ -192,8 +160,6 @@
                             email: email,
                             phone: phone,
                             password: confirmPassword,
-                            vehicleMake: vehicleMake,
-                            vehicleRegistration: vehicleRegistration,
                             type: 'driverSignUp',
                             role: 'DRIVER'
                         },
@@ -204,7 +170,6 @@
                             //alert(p.response);
                             if (p.response == "ok") {
                                 alertSweet('Successfully Signed Up as Driver', 'success', `Welcome ${firstName}`);
-                                window.location.href = './login.php';
                             } else if (p.response == "error") {
                                 alertSweet('That email already exists', 'error', 'Failed');
                             }

@@ -24,7 +24,16 @@
 </head>
 <body>
 
-<?php include './layouts/navbar.php'; ?>
+<?php include './layouts/navbar.php'; 
+    if (isset($_SESSION['LoggedIn'])) {
+        if ($_SESSION['role'] == 'CLIENT') {
+            header("Location: ./index.php");
+        }
+        if ($_SESSION['role'] == 'DRIVER') {
+            header("Location: ./driver/index.php");
+        }
+    }
+?>
 
 <section class="mbr-section form1 cid-sr3yJiKgyp" id="form1-6">
     <div class="container">
@@ -51,7 +60,7 @@
                         <div class="row">
                         <div data-for="password" class="col-md-4  form-group">
                             <label for="password" class="form-control-label mbr-fonts-style display-7">Password</label>
-                            <input type="password" name="password" data-form-field="password" class="form-control display-7" id="password">
+                            <input type="password" name="password" data-form-field="password" class="form-control display-7" placeholder="Password" id="password">
                         </div>
                         </div>
                         
